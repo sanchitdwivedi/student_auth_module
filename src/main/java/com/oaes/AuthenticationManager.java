@@ -95,8 +95,13 @@ public class AuthenticationManager {
             System.out.println("Failed to access webcam and microphone! Please try refreshing the page or changing your browser.");
             return;
         }
-
-        System.out.println("Redirecting to Questions....");
+        System.out.println("Please wait while the exam coordinator starts your test.");
+        while(true){
+            if(studentService.getStudentById(student.getStudentID()).getTestStatus()==1) break;
+        }
+        System.out.println("Exam started! Redirecting to Questions....");
+        student.setTestStatus(0);
+        studentService.updateStudent(student);
     }
 }
 

@@ -22,6 +22,8 @@ public class Student {
     private int locked;
     @Column(nullable = false)
     private int triesLeft;
+    @Column(nullable = false)
+    private int testStatus;
 
     public Student(long uuid, long studentID, String password, String rollNo, String email, College college, int locked, int triesLeft) {
         this.uuid = uuid;
@@ -32,10 +34,19 @@ public class Student {
         this.college = college;
         this.locked = locked;
         this.triesLeft = triesLeft;
+        this.testStatus = 0;
     }
 
     public Student() {
 
+    }
+
+    public int getTestStatus() {
+        return testStatus;
+    }
+
+    public void setTestStatus(int testStatus) {
+        this.testStatus = testStatus;
     }
 
     public long getUuid() {
@@ -113,6 +124,7 @@ public class Student {
                 ", college=" + college +
                 ", locked=" + locked +
                 ", triesLeft=" + triesLeft +
+                ", testStatus=" + testStatus +
                 '}';
     }
 }
