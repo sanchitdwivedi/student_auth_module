@@ -3,6 +3,7 @@ package com.oaes;
 import com.oaes.entity.Student;
 import com.oaes.service.AuthenticationService;
 import com.oaes.service.StudentService;
+import com.oaes.service.TestService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,10 +12,12 @@ public class AuthenticationManager {
     private AuthenticationService authenticationService;
     private StudentService studentService;
     private static AuthenticationManager instance;
+    private TestService testService;
 
     private AuthenticationManager(){
         authenticationService = new AuthenticationService();
         studentService = new StudentService();
+        testService = new TestService();
     }
 
     public static AuthenticationManager getInstance(){
@@ -95,10 +98,9 @@ public class AuthenticationManager {
             System.out.println("Failed to access webcam and microphone! Please try refreshing the page or changing your browser.");
             return;
         }
+        testService.subscribe(student);
         System.out.println("Please wait while the exam coordinator starts your test.");
-        while(true){
-            if(studentService.getStudentById(student.getUserID()).getTestStatus()==1) break;
-        }
+        while(!testService.isTestStarted());
         System.out.println("Exam started! Redirecting to Questions....");
         student.setTestStatus(0);
         studentService.updateStudent(student);

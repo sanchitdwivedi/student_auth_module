@@ -37,4 +37,8 @@ public class TestService {
             student.setTestStatus(1);
         }
     }
+
+    public boolean isTestStarted() {
+        return testStarted;
+    }
 }
