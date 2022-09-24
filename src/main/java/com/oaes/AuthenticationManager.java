@@ -97,7 +97,7 @@ public class AuthenticationManager {
         }
         System.out.println("Please wait while the exam coordinator starts your test.");
         while(true){
-            if(studentService.getStudentById(student.getStudentID()).getTestStatus()==1) break;
+            if(studentService.getStudentById(student.getUserID()).getTestStatus()==1) break;
         }
         System.out.println("Exam started! Redirecting to Questions....");
         student.setTestStatus(0);

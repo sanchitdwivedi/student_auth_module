@@ -10,10 +10,10 @@ import org.hibernate.criterion.Restrictions;
 
 public class StudentDaoImpl implements StudentDao{
     @Override
-    public Student findByStudentId(long studentId) {
+    public Student findByUserId(long studentId) {
         Session session = SessionUtil.getSession();
         Criteria criteria = session.createCriteria(Student.class);
-        criteria.add(Restrictions.eq("studentID", studentId));
+        criteria.add(Restrictions.eq("userID", studentId));
         Student student = (Student) criteria.uniqueResult();
         session.close();
         return student;
@@ -35,10 +35,10 @@ public class StudentDaoImpl implements StudentDao{
         try {
             Transaction tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Student.class);
-            criteria.add(Restrictions.eq("studentID", student.getStudentID()));
+            criteria.add(Restrictions.eq("studentID", student.getUserID()));
             Student student1 = (Student) criteria.uniqueResult();
             tx.commit();
-            student.setStudentID(student1.getStudentID());
+            student.setUserID(student1.getUserID());
             session.clear();
             session.beginTransaction();
             session.update(student);

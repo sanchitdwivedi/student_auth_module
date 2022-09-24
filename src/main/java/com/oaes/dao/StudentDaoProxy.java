@@ -13,9 +13,9 @@ public class StudentDaoProxy implements StudentDao{
     }
 
     @Override
-    public Student findByStudentId(long studentId) throws Exception {
+    public Student findByUserId(long studentId) throws Exception {
         if(studentId<0) throw new Exception("Please enter a valid student id");
-        return studentDao.findByStudentId(studentId);
+        return studentDao.findByUserId(studentId);
     }
 
     @Override

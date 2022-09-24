@@ -17,7 +17,7 @@ public class StudentService {
     }
 
     public Student getStudentById(long studentId) throws Exception {
-        return studentDao.findByStudentId(studentId);
+        return studentDao.findByUserId(studentId);
     }
 
     public Student getStudentByEmail(String email) throws Exception {
