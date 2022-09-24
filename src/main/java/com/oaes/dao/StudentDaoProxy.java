@@ -11,22 +11,34 @@ public class StudentDaoProxy implements StudentDao{
     public StudentDaoProxy(){
         studentDao = new StudentDaoImpl();
     }
+    
+    private boolean validStudentId(long studentId){
+        return studentId>=0;
+    }
+
+    private boolean validStudent(Student student){
+        return student!=null;
+    }
+
+    private boolean validEmail(String email){
+        return !VALID_EMAIL_ADDRESS_REGEX.matcher(email).find();
+    }
 
     @Override
     public Student findByUserId(long studentId) throws Exception {
-        if(studentId<0) throw new Exception("Please enter a valid student id");
+        if(!validStudentId(studentId)) throw new Exception("Please enter a valid student id");
         return studentDao.findByUserId(studentId);
     }
 
     @Override
     public Student findByEmail(String email) throws Exception {
-        if(!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) throw new Exception("Invalid Email exception");
+        if(validEmail(email)) throw new Exception("Invalid Email exception");
         return studentDao.findByEmail(email);
     }
 
     @Override
     public void save(Student student) throws Exception {
-        if(student==null) throw new Exception("Invalid student exception");
+        if(!validStudent(student)) throw new Exception("Invalid student exception");
         studentDao.save(student);
     }
 }
